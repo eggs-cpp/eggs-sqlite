@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="eggs">
+      <UniqueIdentifier>{8bc2db95-b402-4663-908f-f1a2582ed551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="eggs\sqlite">
+      <UniqueIdentifier>{07ccef7c-72c2-43ef-b9ed-78b4f17945be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="eggs\sqlite\detail">
+      <UniqueIdentifier>{a2281fb4-5beb-427a-bd82-ceb964781aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="eggs\sqlite\detail\sqlite3">
+      <UniqueIdentifier>{4ecbd6a3-5a13-4c37-87b2-0e54c5219484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sqlite">
+      <UniqueIdentifier>{1224aea4-c7f6-4b2f-a0fb-5e187a47a113}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\sqlite3\sqlite3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\eggs\sqlite\blob.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\statement_iterator.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\conversion_traits.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\database.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\error.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\pragma.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\raw_traits.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\row.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\sequence.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\sqlite.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\statement.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\detail\sqlite3.hpp">
+      <Filter>eggs\sqlite\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\detail\sqlite3\sqlite3.h">
+      <Filter>eggs\sqlite\detail\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\transaction.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

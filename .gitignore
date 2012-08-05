@@ -10,3 +10,8 @@
 *.lai
 *.la
 *.a
+
+# Visual Studio files
+*.sdf
+*.suo
+*.user
