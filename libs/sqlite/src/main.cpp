@@ -18,10 +18,12 @@
 #include <boost/exception/diagnostic_information.hpp>
 
 #include <boost/fusion/include/std_pair.hpp>
-#include <boost/fusion/include/tuple.hpp>
+#include <boost/fusion/include/boost_tuple.hpp>
 #include <boost/fusion/include/io.hpp>
 
 #include <boost/range/iterator_range.hpp>
+
+#include <boost/tuple/tuple.hpp>
 
 inline boost::iterator_range< eggs::sqlite::istatement_iterator<> >
 query( eggs::sqlite::istatement& statement )
@@ -84,76 +86,86 @@ inline std::size_t delete_( eggs::sqlite::ostatement& statement, Row const& row 
 
 int main( int argc, char* argv[] )
 {
-    typedef
-        boost::fusion::tuple< boost::uint32_t, std::string, std::string >
-        note_type;
-
     namespace sqlite = eggs::sqlite;
     try
     {
-        sqlite::database test_db = sqlite::open( "markdown.db" );
-
-        //sqlite::statement test_stmt( test_db, "SELECT * FROM \"sqlite_master\" WHERE type='table'" );
-        sqlite::istatement test_stmt( test_db, "SELECT \"_id\", \"Name\", \"Content\" FROM \"Notes\"" );
-        sqlite::istatement other_test_stmt( test_db, "SELECT \"_id\", \"Name\", \"Content\" FROM \"Notes\" WHERE \"_id\" = $id" );
-        sqlite::ostatement insert_stmt( test_db, "INSERT INTO \"Notes\" (\"Name\", \"Content\") VALUES (?, ?)" );
-
-        //auto params = sqlite3_bind_parameter_count( insert_stmt.native_handle() );
-        //auto insert_columns = insert_stmt.columns();
-
-        sqlite::execute( test_db, "DELETE FROM \"Notes\" WHERE \"_id\" >= 20" );
-
-        {
-            std::map< std::string, std::string > new_notes;
-            new_notes[ "First test" ] = "Some content...";
-            new_notes[ "Second test" ] = "Some more content...";
-            new_notes[ "Last test" ] = "Last content...";
-
-            std::copy(
-                new_notes.cbegin(), new_notes.cend()
-              , sqlite::ostatement_iterator< std::pair< std::string, std::string > >( insert_stmt )
-            );
-        }
-
-        //insert_stmt << std::make_pair( "New", "something..." );
-        //insert_stmt.step();
-
-        int version = sqlite::get_pragma< sqlite::pragma::user_version >( test_db );
-
-        auto r = query< note_type >( test_stmt );
-        std::vector< note_type > v( r.begin(), r.end() );
-
-        for( 
-            sqlite::istatement_iterator< sqlite::istatement >
-                iter( test_stmt )
-              , end
-          ; iter != end
-          ; ++iter
-        )
-        {
-            std::cout
-                << '#' << iter->get< boost::uint32_t >( 0 ) << ' '
-                << iter->get< std::string >( 1 ) << ':' << '\n'
-                << iter->get< std::string >( 2 ).substr( 0, 30 ) << "..."
-                << '\n' << std::endl;
-        }
-        
-        other_test_stmt[ "id" ] = 19;
-        std::copy(
-            sqlite::istatement_iterator< note_type >( other_test_stmt ), sqlite::istatement_iterator< note_type >()
-          , std::ostream_iterator< note_type >( std::cout, "\n" )
+        sqlite::database books_db( "books.db" );
+        sqlite::istatement books_by_author(
+            books_db
+          , "SELECT title, year FROM books "
+            "WHERE author=:author "
+            "ORDER BY year ASC"
         );
 
-        int breakpoint = 3;
-    } catch( sqlite::sqlite_error const& e ) {
-        std::cerr
-            << "something went wrong :$" "\n"
-            << boost::diagnostic_information( e ) << "\n"
-            << e.message() << std::endl
-            ;
+        // Core access
+        books_by_author["author"] = "Bjarne Stroustrup";
+        {
+            books_by_author.step();
+            std::cout
+             << "title: " << books_by_author.get< std::string >( 0 ) << ", "
+             << "year: " << books_by_author.get< int >( 1 ) << '\n'
+             ;
+        }
+        books_by_author.reset();
+
+        // Row object
+        books_by_author["author"] = "Bjarne Stroustrup";
+        {
+            sqlite::row row_results;
+
+            books_by_author >> row_results;
+            std::cout
+             << "title: " << row_results.get< std::string >( 0 ) << ", "
+             << "year: " << row_results.get< int >( 1 ) << '\n'
+             ;
+        }
+        books_by_author.reset();
+        
+        // Fusion sequences
+        books_by_author["author"] = "Bjarne Stroustrup";
+        {
+            std::pair< std::string, int > pair_results;
+
+            books_by_author >> pair_results;
+            std::cout
+             << "title: " << pair_results.first << ", "
+             << "year: " << pair_results.second << '\n'
+             ;
+
+            std::string title;
+            int year;
+
+            books_by_author >> boost::tie( title, year );
+            std::cout
+             << "title: " << title << ", "
+             << "year: " << year << '\n'
+             ;
+        }
+        books_by_author.reset();
+
+        // Result set
+        books_by_author["author"] = "Bjarne Stroustrup";
+        {
+            std::vector< sqlite::row > result_set;
+            result_set.assign(
+                sqlite::istatement_iterator< sqlite::row >( books_by_author )
+              , sqlite::istatement_iterator< sqlite::row >()
+            );
+
+            // do something with result_set
+        }
+        books_by_author.reset();
+        
+
+    //} catch( sqlite::sqlite_error const& e ) {
+    //    std::cerr
+    //        << "something went wrong" "\n"
+    //        << boost::diagnostic_information( e ) << "\n"
+    //        << e.message() << std::endl
+    //        ;
     } catch( std::exception const& e ) {
         std::cerr
-            << "something went wrong :$" "\n"
+            << "something went wrong" "\n"
             << boost::diagnostic_information( e ) << std::endl
             ;
     } catch( ... ) {

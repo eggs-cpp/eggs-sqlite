@@ -12,6 +12,9 @@
 *.a
 
 # Visual Studio files
+*.opensdf
 *.sdf
 *.suo
 *.user
+/libs/sqlite/vs/Debug
+/libs/sqlite/vs/ipch
