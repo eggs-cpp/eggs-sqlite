@@ -225,7 +225,7 @@ namespace eggs { namespace sqlite {
                 right._values[i] = detail::get_value( left, i );
             }
         }
-        friend inline void insert( ostatement& left, row& right )
+        friend inline void insert( ostatement& left, row const& right )
         {
             std::size_t const column_count = right._values.size();
 
