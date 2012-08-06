@@ -97,16 +97,6 @@ namespace eggs { namespace sqlite {
             return *this;
         }
 
-        boost::int64_t last_insert_rowid() const
-        {
-            return sqlite3_last_insert_rowid( _handle );
-        }
-
-        std::size_t changes() const
-        {
-            return sqlite3_changes( _handle );
-        }
-
         native_handle_type native_handle() const
         {
             return _handle;
@@ -136,6 +126,16 @@ namespace eggs { namespace sqlite {
         sqlite3* handle = detail::open( filename.c_str() );
 
         return database( handle );
+    }
+
+    inline boost::int64_t last_insert_rowid( database const& db )
+    {
+        return sqlite3_last_insert_rowid( db.native_handle() );
+    }
+
+    inline std::size_t changes( database const& db )
+    {
+        return sqlite3_changes( db.native_handle() );
     }
 
 } } // namespace eggs::sqlite

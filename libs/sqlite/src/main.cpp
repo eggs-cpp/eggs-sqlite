@@ -49,7 +49,7 @@ inline boost::int64_t insert( eggs::sqlite::ostatement& statement )
 {
     statement.step();
 
-    return statement.get_database().last_insert_rowid();
+    return eggs::sqlite::last_insert_rowid( statement.get_database() );
 }
 template< typename Row >
 inline boost::int64_t insert( eggs::sqlite::ostatement& statement, Row const& row )
@@ -62,7 +62,7 @@ inline std::size_t update( eggs::sqlite::ostatement& statement )
 {
     statement.step();
 
-    return statement.get_database().changes();
+    return eggs::sqlite::changes( statement.get_database() );
 }
 template< typename Row >
 inline std::size_t update( eggs::sqlite::ostatement& statement, Row const& row )
@@ -75,7 +75,7 @@ inline std::size_t delete_( eggs::sqlite::ostatement& statement )
 {
     statement.step();
 
-    return statement.get_database().changes();
+    return eggs::sqlite::changes( statement.get_database() );
 }
 template< typename Row >
 inline std::size_t delete_( eggs::sqlite::ostatement& statement, Row const& row )
