@@ -16,5 +16,9 @@
 *.sdf
 *.suo
 *.user
-/libs/sqlite/vs/Debug
 /libs/sqlite/vs/ipch
+/libs/sqlite/vs/Debug
+/libs/sqlite/vs/Release
+/libs/sqlite/vs/Library Debug
+/libs/sqlite/vs/Library Release
+/libs/sqlite/vs/x64
