@@ -121,21 +121,21 @@ namespace eggs { namespace sqlite {
             };
         };
 
-        void invoke_pragma( database& db, std::string const& query )
+        inline void invoke_pragma( database& db, std::string const& query )
         {
             istatement pragma_statement( db, query );
 
             pragma_statement.step();
         }
         template< typename Type >
-        void invoke_pragma( database& db, std::string const& query, Type& value )
+        inline void invoke_pragma( database& db, std::string const& query, Type& value )
         {
             istatement pragma_statement( db, query );
 
             pragma_statement >> value;
         }
         template< typename Type >
-        void invoke_pragma( database& db, std::string const& query, std::vector< Type >& value )
+        inline void invoke_pragma( database& db, std::string const& query, std::vector< Type >& value )
         {
             istatement pragma_statement( db, query );
 

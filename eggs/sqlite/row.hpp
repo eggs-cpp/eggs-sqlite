@@ -45,7 +45,7 @@ namespace eggs { namespace sqlite {
             >
             row_value_type;
 
-        storage_class::enum_type type( row_value_type const& value )
+        inline storage_class::enum_type type( row_value_type const& value )
         {
             static storage_class::enum_type const map[] =
             {
