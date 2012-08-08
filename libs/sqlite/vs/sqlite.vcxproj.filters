@@ -72,5 +72,8 @@
     <ClInclude Include="..\..\..\eggs\sqlite\transaction.hpp">
       <Filter>eggs\sqlite</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite\mutex.hpp">
+      <Filter>eggs\sqlite</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

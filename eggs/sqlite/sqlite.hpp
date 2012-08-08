@@ -16,6 +16,7 @@
 #include <eggs/sqlite/conversion_traits.hpp>
 #include <eggs/sqlite/database.hpp>
 #include <eggs/sqlite/error.hpp>
+#include <eggs/sqlite/mutex.hpp>
 #include <eggs/sqlite/pragma.hpp>
 #include <eggs/sqlite/raw_traits.hpp>
 #include <eggs/sqlite/row.hpp>

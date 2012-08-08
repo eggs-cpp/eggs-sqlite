@@ -296,6 +296,7 @@
     <ClInclude Include="..\..\..\eggs\sqlite\detail\sqlite3.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\detail\sqlite3\sqlite3.h" />
     <ClInclude Include="..\..\..\eggs\sqlite\error.hpp" />
+    <ClInclude Include="..\..\..\eggs\sqlite\mutex.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\pragma.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\raw_traits.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\row.hpp" />
