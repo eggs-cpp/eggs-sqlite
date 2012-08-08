@@ -26,17 +26,24 @@ namespace eggs { namespace sqlite {
     {
     public:
         typedef sqlite3_mutex* native_handle_type;
+        
+        struct type
+        {
+            enum enum_type
+            {
+                fast = SQLITE_MUTEX_FAST
+              , recursive = SQLITE_MUTEX_RECURSIVE
+            };
+        };
 
     public:
-        mutex()
-          : _handle( sqlite3_mutex_alloc( SQLITE_MUTEX_FAST ) )
+        explicit mutex( type::enum_type type = mutex::type::fast )
+          : _handle( sqlite3_mutex_alloc( type ) )
         {}
 
         explicit mutex( native_handle_type handle )
           : _handle( handle )
-        {
-            BOOST_ASSERT(( handle != 0 ));
-        }
+        {}
 
     private:
         BOOST_MOVABLE_BUT_NOT_COPYABLE( mutex )
