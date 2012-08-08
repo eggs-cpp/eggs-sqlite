@@ -81,7 +81,7 @@ template< typename Row >
 inline std::size_t delete_( eggs::sqlite::ostatement& statement, Row const& row )
 {
     statement << row;
-    return delete( statement );
+    return delete_( statement );
 }
 
 int main( int argc, char* argv[] )
