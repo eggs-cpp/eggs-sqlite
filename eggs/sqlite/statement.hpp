@@ -49,8 +49,8 @@ namespace eggs { namespace sqlite {
             enum enum_type
             {
                 reset = 0
-                , row = result_code::row
-                , done = result_code::done
+              , row = result_code::row
+              , done = result_code::done
             };
         };
 
