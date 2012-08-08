@@ -72,7 +72,12 @@ namespace eggs { namespace sqlite {
             } else if( result != result_code::ok ) {
                 sqlite3_finalize( handle );
                 
-                BOOST_THROW_EXCEPTION( sqlite_error( result, db_handle ) );
+                if( result == result_code::error )
+                {
+                    BOOST_THROW_EXCEPTION( sqlite_syntax_error( db_handle ) );
+                } else {
+                    BOOST_THROW_EXCEPTION( sqlite_error( result ) );
+                }
             }
 
             return handle;

@@ -17,6 +17,8 @@
 #include <boost/system/error_code.hpp>
 #include <boost/system/system_error.hpp>
 
+#include <string>
+
 namespace eggs { namespace sqlite {
 
     struct result_code
@@ -168,13 +170,22 @@ namespace eggs { namespace sqlite {
       : public boost::system::system_error
     {
     public:
-        explicit sqlite_error( int result_code, sqlite3* db_handle = 0 )
+        explicit sqlite_error( int result_code )
           : boost::system::system_error(
                 boost::system::error_code(
                     result_code
                   , sqlite_category()
                 )
             )
+        {}
+    };
+
+    class sqlite_syntax_error
+      : public sqlite_error
+    {
+    public:
+        explicit sqlite_syntax_error( sqlite3* db_handle = 0 )
+          : sqlite_error( result_code::error )
           , _message(
                 db_handle != 0
                   ? sqlite3_errmsg( db_handle )
@@ -182,13 +193,26 @@ namespace eggs { namespace sqlite {
             )
         {}
 
-        char const* message() const
+        char const* what() const
         {
-            return _message;
+            if( _what.empty() )
+            {
+                try
+                {
+                    _what = sqlite_error::what();
+                    if( !_what.empty() )
+                        _what += ": ";
+                    _what += _message;
+                } catch( ... ) {
+                    return sqlite_error::what();
+                }
+            }
+            return _what.c_str();
         }
 
     private:
-        char const* _message;
+        std::string _message;
+        mutable std::string _what;
     };
 
 } } // namespace eggs::sqlite
