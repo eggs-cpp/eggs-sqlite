@@ -26,7 +26,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\sqlite3\sqlite3.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\sqlite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
