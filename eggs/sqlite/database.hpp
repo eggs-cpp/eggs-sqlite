@@ -29,6 +29,7 @@ namespace eggs { namespace sqlite {
         
         inline sqlite3* open(
             char const* filename
+          , int mode
           , boost::system::error_code* error_code = 0
         )
         {
@@ -36,8 +37,7 @@ namespace eggs { namespace sqlite {
             int const result =
                 sqlite3_open_v2(
                     filename, &handle
-                  , SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE
-                  , 0
+                  , mode, 0
                 );
             if( error_code != 0 )
             {
@@ -58,6 +58,16 @@ namespace eggs { namespace sqlite {
     public:
         typedef sqlite3* native_handle_type;
 
+        struct mode
+        {
+            enum enum_type
+            {
+                read_only = SQLITE_OPEN_READONLY
+              , read_write = SQLITE_OPEN_READWRITE
+              , create = SQLITE_OPEN_CREATE
+            };
+        };
+
     public:
         explicit database( native_handle_type handle )
           : _handle( handle )
@@ -65,8 +75,8 @@ namespace eggs { namespace sqlite {
             BOOST_ASSERT(( handle != 0 ));
         }
 
-        explicit database( std::string const& filename )
-          : _handle( detail::open( filename.c_str() ) )
+        explicit database( std::string const& filename, int mode = database::mode::read_write | database::mode::create )
+          : _handle( detail::open( filename.c_str(), mode ) )
         {}
         
     private:
@@ -115,15 +125,15 @@ namespace eggs { namespace sqlite {
         return !( left == right );
     }
 
-    inline database open( std::string const& filename, boost::system::error_code& error_code )
+    inline database open( std::string const& filename, boost::system::error_code& error_code, int mode = database::mode::read_write | database::mode::create )
     {
-        sqlite3* handle = detail::open( filename.c_str(), &error_code );
+        sqlite3* handle = detail::open( filename.c_str(), mode, &error_code );
 
         return database( error_code ? static_cast< sqlite3* >( 0 ) : handle );
     }
-    inline database open( std::string const& filename )
+    inline database open( std::string const& filename, int mode = database::mode::read_write | database::mode::create )
     {
-        sqlite3* handle = detail::open( filename.c_str() );
+        sqlite3* handle = detail::open( filename.c_str(), mode );
 
         return database( handle );
     }

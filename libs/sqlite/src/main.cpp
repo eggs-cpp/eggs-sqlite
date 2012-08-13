@@ -89,7 +89,7 @@ int main( int argc, char* argv[] )
     namespace sqlite = eggs::sqlite;
     try
     {
-        sqlite::database books_db( "books.db" );
+        sqlite::database books_db( "books.db", sqlite::database::mode::read_write | sqlite::database::mode::create );
         sqlite::istatement books_by_author(
             books_db
           , "SELECT title, year FROM books "
