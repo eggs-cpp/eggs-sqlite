@@ -193,6 +193,11 @@ namespace eggs { namespace sqlite {
             )
         {}
 
+        char const* message() const
+        {
+            return _message.c_str();
+        }
+
         char const* what() const
         {
             if( _what.empty() )
