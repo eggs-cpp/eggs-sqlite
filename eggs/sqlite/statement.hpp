@@ -430,7 +430,7 @@ namespace eggs { namespace sqlite {
           , _columns( right._columns )
         {}
         istatement( BOOST_RV_REF( istatement ) right )
-          : detail::statement_base( boost::move( right ) )
+            : detail::statement_base( boost::move( static_cast< detail::statement_base& >( right ) ) )
           , _columns( boost::move( right._columns ) )
         {}
 
@@ -445,7 +445,7 @@ namespace eggs { namespace sqlite {
         {
             if( this != &right )
             {
-                detail::statement_base::operator =( boost::move( right ) );
+                detail::statement_base::operator =( boost::move( static_cast< detail::statement_base& >( right ) ) );
                 _columns = boost::move( right._columns );
             }
             return *this;
@@ -579,7 +579,7 @@ namespace eggs { namespace sqlite {
           , _columns( right._columns )
         {}
         ostatement( BOOST_RV_REF( ostatement ) right )
-          : detail::statement_base( boost::move( right ) )
+          : detail::statement_base( boost::move( static_cast< detail::statement_base& >( right ) ) )
           , _columns( boost::move( right._columns ) )
         {}
 
@@ -594,7 +594,7 @@ namespace eggs { namespace sqlite {
         {
             if( this != &right )
             {
-                detail::statement_base::operator =( boost::move( right ) );
+                detail::statement_base::operator =( boost::move( static_cast< detail::statement_base& >( right ) ) );
                 _columns = boost::move( right._columns );
             }
             return *this;
