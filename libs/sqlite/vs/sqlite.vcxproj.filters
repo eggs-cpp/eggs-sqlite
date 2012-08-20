@@ -57,9 +57,6 @@
     <ClInclude Include="..\..\..\eggs\sqlite\sequence.hpp">
       <Filter>eggs\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\eggs\sqlite\sqlite.hpp">
-      <Filter>eggs\sqlite</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\eggs\sqlite\statement.hpp">
       <Filter>eggs\sqlite</Filter>
     </ClInclude>
@@ -74,6 +71,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\eggs\sqlite\mutex.hpp">
       <Filter>eggs\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\eggs\sqlite.hpp">
+      <Filter>eggs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

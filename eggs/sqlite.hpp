@@ -1,5 +1,5 @@
 /**
- * Eggs.SQLite <eggs/sqlite/sqlite.hpp>
+ * Eggs.SQLite <eggs/sqlite.hpp>
  * 
  * Copyright Agustín Bergé, Fusion Fenix 2012
  * 
@@ -9,8 +9,8 @@
  * Library home page: http://github.com/eggs-cpp/eggs-sqlite
  */
 
-#ifndef EGGS_SQLITE_SQLITE_HPP
-#define EGGS_SQLITE_SQLITE_HPP
+#ifndef EGGS_SQLITE_HPP
+#define EGGS_SQLITE_HPP
 
 #include <eggs/sqlite/blob.hpp>
 #include <eggs/sqlite/conversion_traits.hpp>
@@ -25,8 +25,4 @@
 #include <eggs/sqlite/statement_iterator.hpp>
 #include <eggs/sqlite/transaction.hpp>
 
-namespace eggs { namespace sqlite {
-
-} } // namespace eggs::sqlite
-
-#endif /*EGGS_SQLITE_SQLITE_HPP*/
+#endif /*EGGS_SQLITE_HPP*/

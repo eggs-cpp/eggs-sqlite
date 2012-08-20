@@ -290,6 +290,7 @@
     <ClCompile Include="..\src\sqlite3\sqlite3.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\eggs\sqlite.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\blob.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\conversion_traits.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\database.hpp" />
@@ -301,7 +302,6 @@
     <ClInclude Include="..\..\..\eggs\sqlite\raw_traits.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\row.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\sequence.hpp" />
-    <ClInclude Include="..\..\..\eggs\sqlite\sqlite.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\statement.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\statement_iterator.hpp" />
     <ClInclude Include="..\..\..\eggs\sqlite\transaction.hpp" />

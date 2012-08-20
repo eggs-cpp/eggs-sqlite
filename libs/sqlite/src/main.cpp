@@ -9,7 +9,7 @@
  * Library home page: http://github.com/eggs-cpp/eggs-sqlite
  */
 
-#include <eggs/sqlite/sqlite.hpp>
+#include <eggs/sqlite.hpp>
 
 #include <algorithm>
 #include <exception>
@@ -96,6 +96,9 @@ int main( int argc, char* argv[] )
             "WHERE author=:author "
             "ORDER BY year ASC"
         );
+
+        sqlite::istatement s2( books_db, "SELECT * FROM books" );
+        s2 = boost::move( books_by_author );
 
         // Core access
         books_by_author["author"] = "Bjarne Stroustrup";
